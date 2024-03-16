@@ -1,11 +1,5 @@
-import { Inter } from 'next/font/google';
-
-const inter = Inter({ subsets: ['latin'] });
+import PostList from '@/components/PostList';
 
 export default function Home() {
-  return (
-    <main className="h-[2000px]">
-      <h1>NextJs Hello World</h1>
-    </main>
-  );
+  return <PostList />;
 }

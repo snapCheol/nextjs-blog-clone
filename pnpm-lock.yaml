@@ -14,6 +14,9 @@ dependencies:
   '@supabase/supabase-js':
     specifier: ^2.39.7
     version: 2.39.7
+  '@tanstack/react-query':
+    specifier: ^5.27.5
+    version: 5.27.5(react@18.2.0)
   '@uiw/react-markdown-preview':
     specifier: ^5.0.10
     version: 5.0.10(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
@@ -44,6 +47,9 @@ dependencies:
   react-icons:
     specifier: ^5.0.1
     version: 5.0.1(react@18.2.0)
+  react-intersection-observer:
+    specifier: ^9.8.1
+    version: 9.8.1(react-dom@18.2.0)(react@18.2.0)
   react-select:
     specifier: ^5.8.0
     version: 5.8.0(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
@@ -713,6 +719,19 @@ packages:
     resolution: {integrity: sha512-E4KcWTpoLHqwPHLxidpOqQbcrZVgi0rsmmZXUle1jXmJfuIf/UWpczUJ7MZZ5tlxytgJXyp0w4PGkkeLiuIdZw==}
     dependencies:
       tslib: 2.6.2
+    dev: false
+
+  /@tanstack/query-core@5.27.5:
+    resolution: {integrity: sha512-HuYOo46NhzNX1SwXCmLf/Skr8B7T56cDHUN+iOhnu7+GOkUMThda64GwZpAqQzBT8TOTBQo6RQaNe0gi3Gi2fw==}
+    dev: false
+
+  /@tanstack/react-query@5.27.5(react@18.2.0):
+    resolution: {integrity: sha512-VcuQo4CYRGsPsD8/rj9e4WnXN6eU4GKmAs0Yd9a1hLSx6DxAzRaBdrwu6P9lfjpz8bxaYkZRyb5NI+YtLipoYA==}
+    peerDependencies:
+      react: ^18.0.0
+    dependencies:
+      '@tanstack/query-core': 5.27.5
+      react: 18.2.0
     dev: false
 
   /@types/debug@4.1.12:
@@ -4196,6 +4215,19 @@ packages:
       react: '*'
     dependencies:
       react: 18.2.0
+    dev: false
+
+  /react-intersection-observer@9.8.1(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-QzOFdROX8D8MH3wE3OVKH0f3mLjKTtEN1VX/rkNuECCff+aKky0pIjulDhr3Ewqj5el/L+MhBkM3ef0Tbt+qUQ==}
+    peerDependencies:
+      react: ^15.0.0 || ^16.0.0 || ^17.0.0 || ^18.0.0
+      react-dom: ^15.0.0 || ^16.0.0 || ^17.0.0 || ^18.0.0
+    peerDependenciesMeta:
+      react-dom:
+        optional: true
+    dependencies:
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
     dev: false
 
   /react-is@16.13.1:
