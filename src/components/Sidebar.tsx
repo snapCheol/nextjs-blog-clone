@@ -1,4 +1,6 @@
+import { useCategories } from '@/utils/hooks';
 import { cn } from '@/utils/style';
+import { createClient } from '@/utils/supabase/client';
 import Link from 'next/link';
 import { FC } from 'react';
 import { AiFillGithub, AiFillInstagram, AiOutlineClose } from 'react-icons/ai';
@@ -9,7 +11,11 @@ type SidebarProps = {
   isOpen: boolean;
 };
 
+const supabase = createClient();
+
 const Sidebar: FC<SidebarProps> = ({ close, isOpen }) => {
+  const { data: existingCategories } = useCategories();
+
   return (
     <div
       className={cn(
@@ -20,25 +26,37 @@ const Sidebar: FC<SidebarProps> = ({ close, isOpen }) => {
       <div className="flex justify-end lg:hidden">
         <IconButton Icon={AiOutlineClose} onClick={close} />
       </div>
-      <Link href="/" className="w-48 to-gray-600 font-medium hover:underline">
+      <Link href="/" className="w-48 font-medium text-gray-600 hover:underline">
         홈
       </Link>
       <Link
-        href="/tag"
-        className="w-48 to-gray-600 font-medium hover:underline"
+        href="/tags"
+        className="w-48 font-medium text-gray-600 hover:underline"
       >
         태그
       </Link>
-      <Link
-        href="/category/Web-Development"
-        className="w-48 to-gray-600 font-medium hover:underline"
-      >
-        Web Development
-      </Link>
-
+      {existingCategories?.map((category) => (
+        <Link
+          href={`/category/${category}`}
+          className="w-48 font-medium text-gray-600 hover:underline"
+          key={category}
+        >
+          {category}
+        </Link>
+      ))}
       <div className="mt-10 flex items-center gap-4">
-        <IconButton component={Link} Icon={AiFillInstagram} href="#none" />
-        <IconButton component={Link} Icon={AiFillGithub} href="#none" />
+        <IconButton
+          Icon={AiFillInstagram}
+          component={Link}
+          href="https://www.instagram.com/dhoonjang"
+          target="_blank"
+        />
+        <IconButton
+          Icon={AiFillGithub}
+          component={Link}
+          href="https://www.github.com/dhoonjang"
+          target="_blank"
+        />
       </div>
     </div>
   );
