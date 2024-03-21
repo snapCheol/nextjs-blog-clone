@@ -1,5 +1,5 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
-import { Post, PostRequest } from '@/types';
+import type { Post, PostRequest } from '@/types';
 import { createClient } from '@/utils/supabase/server';
 import type { StorageError } from '@supabase/storage-js';
 import formidable from 'formidable';

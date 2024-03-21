@@ -1,5 +1,5 @@
 import { MarkdownViewer } from '@/components/Markdown';
-import { Post } from '@/types';
+import type { Post } from '@/types';
 import { createClient } from '@/utils/supabase/server';
 import { format } from 'date-fns';
 import { GetServerSideProps } from 'next';

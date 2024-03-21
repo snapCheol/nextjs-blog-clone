@@ -1,19 +1,17 @@
-import { Post } from '@/types';
+import type { Post } from '@/types';
 import { cn } from '@/utils/style';
 import Image from 'next/image';
 import Link from 'next/link';
 import { FC } from 'react';
 
-type PostCardProps = Omit<Post, 'tags'> & {
+export type PostCardProps = Omit<Post, 'tags'> & {
   className?: string;
 };
 
 const PostCard: FC<PostCardProps> = ({
   id,
   title,
-  category,
   content,
-  created_at,
   preview_image_url,
   className,
 }) => {
@@ -22,9 +20,9 @@ const PostCard: FC<PostCardProps> = ({
       <div className="relative aspect-[1.8/1] w-full">
         <Image
           src={preview_image_url ?? '/next.svg'}
-          sizes={'360px'}
-          alt={title}
           fill
+          sizes="360px"
+          alt={title}
           className="object-cover"
         />
       </div>
