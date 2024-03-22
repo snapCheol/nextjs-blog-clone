@@ -1,20 +1,43 @@
 import PostList from '@/components/PostList';
-import { GetServerSideProps } from 'next';
+import { Post } from '@/types';
+import { createClient } from '@/utils/supabase/server';
+import { GetStaticPaths, GetStaticProps } from 'next';
 
-type TagPostProps = {
+type TagPostsrops = {
   tag: string;
+  posts: Post[];
 };
 
-export default function TagPosts({ tag }: TagPostProps) {
-  return <PostList tag={tag} />;
-}
+const supabase = createClient({});
 
-export const getServerSideProps: GetServerSideProps<TagPostProps> = async ({
-  query,
-}) => {
+export const getStaticPaths = (async () => {
+  const { data } = await supabase.from('Post').select('tags');
+  const tags = Array.from(new Set(data?.flatMap((d) => JSON.parse(d.tags))));
+  return {
+    paths: tags.map((tag) => ({ params: { tag } })),
+    fallback: 'blocking',
+  };
+}) satisfies GetStaticPaths;
+
+export const getStaticProps = (async (context) => {
+  const tag = context.params?.tag as string;
+  const { data } = await supabase
+    .from('Post')
+    .select('*')
+    .like('tags', `%${tag}%`);
+
   return {
     props: {
-      tag: query.tag as string,
+      tag,
+      posts:
+        data?.map((post) => ({
+          ...post,
+          tags: JSON.parse(post.tags) as string[],
+        })) ?? [],
     },
   };
-};
+}) satisfies GetStaticProps<TagPostsrops>;
+
+export default function TagPosts({ tag }: TagPostsrops) {
+  return <PostList tag={tag} />;
+}
