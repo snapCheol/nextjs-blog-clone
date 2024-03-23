@@ -44,6 +44,16 @@ export default function Admin() {
           </div>
           <Button onClick={() => router.push('/write')}>글 쓰러 가기</Button>
           <Button
+            type="button"
+            onClick={() => {
+              fetch('/api/posts', {
+                method: 'DELETE',
+              });
+            }}
+          >
+            테스트 글 삭제
+          </Button>
+          <Button
             onClick={() => {
               supabase.auth.signOut();
               router.push('/');
@@ -60,7 +70,9 @@ export default function Admin() {
               <Input type="text" placeholder="이메일" ref={emailRef} />
               <Input type="password" placeholder="비밀번호" ref={passwordRef} />
             </div>
-            <Button className="mt-4">로그인</Button>
+            <Button className="mt-4" type="submit">
+              로그인
+            </Button>
           </form>
         </div>
       )}
