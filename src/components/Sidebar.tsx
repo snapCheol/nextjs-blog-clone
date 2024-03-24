@@ -21,7 +21,11 @@ const Sidebar: FC<SidebarProps> = ({ close, isOpen }) => {
       )}
     >
       <div className="flex justify-end lg:hidden">
-        <IconButton Icon={AiOutlineClose} onClick={close} />
+        <IconButton
+          Icon={AiOutlineClose}
+          onClick={close}
+          label="sidebarClose"
+        />
       </div>
       <Link href="/" className="w-48 font-medium text-gray-600 hover:underline">
         홈
@@ -46,12 +50,14 @@ const Sidebar: FC<SidebarProps> = ({ close, isOpen }) => {
           Icon={AiFillInstagram}
           component={Link}
           href="https://www.instagram.com/dhoonjang"
+          label="instagramLink"
           target="_blank"
         />
         <IconButton
           Icon={AiFillGithub}
           component={Link}
           href="https://www.github.com/dhoonjang"
+          label="githubLink"
           target="_blank"
         />
       </div>

@@ -2,14 +2,12 @@ import Button from '@/components/Button';
 import Input from '@/components/Input';
 import { MarkdownEditor } from '@/components/Markdown';
 import { useCategories, useTags } from '@/utils/hooks';
+import { createClient } from '@/utils/supabase/client';
 import { useRouter } from 'next/router';
 import { FormEvent, useRef, useState } from 'react';
 import ReactSelect from 'react-select/creatable';
 
-type WriteProps = {
-  existingTags: string[];
-  existingCategories: string[];
-};
+const supabase = createClient();
 
 export default function Write() {
   const router = useRouter();
@@ -62,19 +60,21 @@ export default function Write() {
           <Input type="text" placeholder="제목" ref={titleRef} />
           <Input type="file" accept="image/*" ref={fileRef} />
           <ReactSelect
-            options={existingCategories?.map((category) => ({
+            options={(existingCategories ?? []).map((category) => ({
               label: category,
               value: category,
             }))}
+            inputId="category"
             placeholder="카테고리"
             onChange={(e) => e && setCategory(e.value)}
             isMulti={false}
           />
           <ReactSelect
-            options={existingTags?.map((tag) => ({
+            options={(existingTags ?? []).map((tag) => ({
               label: tag,
               value: tag,
             }))}
+            inputId="tags"
             onChange={(e) =>
               e && setTags(JSON.stringify(e.map((e) => e.value)))
             }
@@ -87,24 +87,10 @@ export default function Write() {
             onChange={(s) => setContent(s ?? '')}
           />
         </div>
-        <Button onClick={() => router.push('/write')}>글 쓰러가기</Button>
+        <Button type="submit" className="mt-4">
+          작성하기
+        </Button>
       </form>
     </div>
   );
 }
-
-// export const getServerSideProps: GetServerSideProps<WriteProps> = async ({
-//   req,
-// }) => {
-//   const supabase = createClient(req.cookies);
-//   const { data } = await supabase.from('Post').select('category, tags');
-
-//   return {
-//     props: {
-//       existingCategories: Array.from(new Set(data?.map((d) => d.category))),
-//       existingTags: Array.from(
-//         new Set(data?.flatMap((d) => JSON.parse(d.tags))),
-//       ),
-//     },
-//   };
-// };
