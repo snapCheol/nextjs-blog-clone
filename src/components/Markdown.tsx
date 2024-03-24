@@ -1,3 +1,5 @@
+'use client';
+
 import { MarkdownPreviewProps } from '@uiw/react-markdown-preview';
 import '@uiw/react-markdown-preview/markdown.css';
 import { MDEditorProps } from '@uiw/react-md-editor';
